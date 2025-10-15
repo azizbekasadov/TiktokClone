@@ -26,13 +26,7 @@ struct TabBarItemData: Identifiable {
     }
 }
 
-protocol TabBarItem: ViewModifier {
-    var data: TabBarItemData { get }
-    
-    init(data: TabBarItemData)
-}
-
-struct MainTabBarItem: TabBarItem {
+struct MainTabBarItem: ViewModifier {
     let data: TabBarItemData
     
     func body(content: Content) -> some View {

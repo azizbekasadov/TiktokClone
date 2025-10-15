@@ -10,7 +10,15 @@ import SwiftUI
 struct MainTabView: View {
     @State private var selectedTab: Int = 0
     
-    let tabBarItems: [TabBarItemData] = [
+    private let viewRegistry: [String: () -> AnyView] = [
+        "Home": { AnyView(FeedView()) },
+        "Friends": { AnyView(VStack{})},
+        "": { AnyView(VStack{})},
+        "Likes": { AnyView(VStack{})},
+        "Profile": { AnyView(VStack{})},
+    ]
+    
+    private let tabBarItems: [TabBarItemData] = [
         .init(
             title: "Home",
             image: "TabBar/home"
@@ -34,6 +42,11 @@ struct MainTabView: View {
         ),
     ]
     
+    @ViewBuilder
+    private func renderProperContainer(for tabBarItem: TabBarItemData) -> some View {
+        
+    }
+    
     var body: some View {
         Group {
             if #available(iOS 18.0, *) {
@@ -52,7 +65,7 @@ struct MainTabView: View {
         TabView(selection: $selectedTab) {
             ForEach(0..<tabBarItems.count, id:\.self) { index in
                 let tab = tabBarItems[index]
-                Text("Test + \(tab.title)")
+                viewRegistry[tab.title]?()
                     .mainTabBarItem(tab)
                     .environment(\.symbolVariants, selectedTab == 0 ? .fill : .none)
                     .onAppear { selectedTab = index }

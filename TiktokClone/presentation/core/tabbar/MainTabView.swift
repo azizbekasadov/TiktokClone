@@ -11,11 +11,38 @@ struct MainTabView: View {
     @State private var selectedTab: Int = 0
     
     private let viewRegistry: [String: () -> AnyView] = [
-        "Home": { AnyView(FeedView()) },
-        "Friends": { AnyView(VStack{})},
-        "": { AnyView(VStack{})},
-        "Likes": { AnyView(VStack{})},
-        "Profile": { AnyView(VStack{})},
+        "Home": {
+            AnyView(
+                FeedView()
+            )
+        },
+        "Friends": {
+            AnyView(
+                NavigationStack {
+                    ExploreView()
+                }
+            )
+        },
+        "": {
+            AnyView(
+                VStack{
+                }
+            )
+        },
+        "Likes": {
+            AnyView(
+                NavigationStack {
+                    NotificationsView()
+                }
+            )
+        },
+        "Profile": {
+            AnyView(
+                NavigationStack {
+                    CurrentUserProfileView()
+                }
+            )
+        },
     ]
     
     private let tabBarItems: [TabBarItemData] = [
@@ -74,6 +101,7 @@ struct MainTabView: View {
         }
         .tint([0, 2].contains(selectedTab) ? Color.white : Color.black)
         .background([0, 2].contains(selectedTab) ? Color.white : Color.black)
+        .opacity(1)
     }
 }
 

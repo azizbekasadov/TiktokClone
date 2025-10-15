@@ -1,0 +1,81 @@
+{
+  "categories": [
+    {
+      "name": "Movies",
+      "videos": [
+        {
+          "description": "Big Buck Bunny tells the story of a giant rabbit with a heart bigger than himself.",
+          "sources": [
+            "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+          ],
+          "subtitle": "By Blender Foundation",
+          "thumb": "images/BigBuckBunny.jpg",
+          "title": "Big Buck Bunny"
+        },
+        {
+          "description": "The first Blender Open Movie from 2006.",
+          "sources": [
+            "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
+          ],
+          "subtitle": "By Blender Foundation",
+          "thumb": "images/ElephantsDream.jpg",
+          "title": "Elephant Dream"
+        },
+        {
+          "description": "HBO GO now works with Chromecast — the easiest way to enjoy online video on your TV.",
+          "sources": [
+            "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
+          ],
+          "subtitle": "By Google",
+          "thumb": "images/ForBiggerBlazes.jpg",
+          "title": "For Bigger Blazes"
+        },
+        {
+          "description": "Introducing Chromecast. The easiest way to enjoy online video and music on your TV when you’re at home.",
+          "sources": [
+            "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"
+          ],
+          "subtitle": "By Google",
+          "thumb": "images/ForBiggerEscapes.jpg",
+          "title": "For Bigger Escape"
+        },
+        {
+          "description": "Introducing Chromecast. The easiest way to enjoy online video and music on your TV for $35.",
+          "sources": [
+            "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4"
+          ],
+          "subtitle": "By Google",
+          "thumb": "images/ForBiggerFun.jpg",
+          "title": "For Bigger Fun"
+        },
+        {
+          "description": "Introducing Chromecast. The easiest way to enjoy online video and music on your TV.",
+          "sources": [
+            "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4"
+          ],
+          "subtitle": "By Google",
+          "thumb": "images/ForBiggerJoyrides.jpg",
+          "title": "For Bigger Joyrides"
+        },
+        {
+          "description": "Introducing Chromecast. The easiest way to enjoy online video and music on your TV.",
+          "sources": [
+            "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4"
+          ],
+          "subtitle": "By Google",
+          "thumb": "images/ForBiggerMeltdowns.jpg",
+          "title": "For Bigger Meltdowns"
+        },
+        {
+          "description": "Sintel is an independently produced short film, initiated by the Blender Foundation.",
+          "sources": [
+            "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4"
+          ],
+          "subtitle": "By Blender Foundation",
+          "thumb": "images/Sintel.jpg",
+          "title": "Sintel"
+        }
+      ]
+    }
+  ]
+}

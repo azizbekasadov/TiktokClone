@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AVKit
 
 enum FeedControlPanelType: String, Identifiable, CaseIterable {
     case like
@@ -29,32 +30,80 @@ struct FeedCell: View {
     // share
     // again dynamic lookup // TODO: replace it with a factory api
     
-    let post: Int
+    @State private var shouldShowPausebutton: Bool = false
+    
+    let post: Post
+    let player: AVPlayer
+    
+    init(post: Post, player: AVPlayer) {
+        self.post = post
+        self.player = player
+    }
     
     var body: some View {
-        ZStack {
-            Rectangle()
+        Button {
+            handlePlayerState()
+        } label: {
+            ZStack {
+                TTVideoPlayer(
+                    player: self.player
+                )
+                .ignoresSafeArea()
                 .containerRelativeFrame([
                     .horizontal, .vertical
                 ])
-                .overlay {
-                    Text("Post \(post)")
-                        .foregroundStyle(.white)
-                }
-            
-            VStack(alignment: .leading) {
-                Spacer()
                 
-                HStack(alignment: .bottom) {
-                    PostTitleAndTagsView()
-                    
+                VStack(alignment: .leading) {
                     Spacer()
                     
-                    ControlButtons()
+                    HStack(alignment: .bottom) {
+                        PostTitleAndTagsView()
+                        
+                        Spacer()
+                        
+                        ControlButtons()
+                    }
+                }
+                .padding(.horizontal, 16)
+                .padding(.bottom, 110)
+                
+                VStack {
+                    Spacer()
+                    
+                    Image(systemName: player.timeControlStatus == .playing ? "pause.fill" : "play.fill")
+                        .font(.system(size: 100))
+                        .fontWeight(.bold)
+                        .foregroundStyle(.gray)
+                    
+                    Spacer()
+                }
+                .opacity(shouldShowPausebutton ? 1 : 0)
+            }
+        }
+    }
+    
+    private func handlePlayerState() {
+        withAnimation {
+            shouldShowPausebutton = true
+        }
+        
+        defer {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                withAnimation {
+                    shouldShowPausebutton = false
                 }
             }
-            .padding(.horizontal, 16)
-            .padding(.bottom, 32)
+        }
+        
+        switch player.timeControlStatus {
+        case .paused:
+            player.play()
+        case .waitingToPlayAtSpecifiedRate:
+            player.pause()
+        case .playing:
+            player.pause()
+        @unknown default:
+            break
         }
     }
     
@@ -126,5 +175,11 @@ struct FeedCell: View {
 }
 
 #Preview {
-    FeedCell(post: 0)
+    FeedCell(
+        post: .init(
+            id: NSUUID().uuidString,
+            videoURL: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+        ),
+        player: AVPlayer(url: .init(string: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4")!)
+    )
 }

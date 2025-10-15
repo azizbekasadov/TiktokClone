@@ -6,22 +6,49 @@
 //
 
 import SwiftUI
+import AVFoundation
 
 struct FeedView: View {
+    @StateObject private var viewModel: FeedViewModel = .init()
+    @State private var scrollPosition: String?
+    @State private var player: AVPlayer = .init()
+    
     var body: some View {
         ScrollView {
             LazyVStack(spacing: .zero) {
-                ForEach(0..<10) { post in
-                    FeedCell(post: post)
+                ForEach(viewModel.posts) { post in
+                    FeedCell(
+                        post: post,
+                        player: player
+                    )
+                    .id(post.id)
+                    .onAppear {
+                        viewModel.playInitialVideoIfNecessary(
+                            for: &player,
+                            with: post.id
+                        )
+                    }
                 }
             }
             .scrollTargetLayout()
         }
+        .onAppear {
+            player.pause()
+            player.play()
+        }
+        .scrollPosition(id: $scrollPosition)
         .scrollTargetBehavior(.paging)
-        .ignoresSafeArea()
+        .ignoresSafeArea(edges: .all)
+        .onChange(of: scrollPosition, { _, newValue in
+            viewModel.replacePlayerItem(for: &player, postId: newValue)
+        })
+        .task {
+            viewModel.fetchPosts()
+        }
     }
 }
 
 #Preview {
     FeedView()
+        .ignoresSafeArea()
 }

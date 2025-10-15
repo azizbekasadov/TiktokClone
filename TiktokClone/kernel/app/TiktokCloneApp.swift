@@ -12,9 +12,7 @@ struct TiktokCloneApp: App {
 
     var body: some Scene {
         WindowGroup {
-            VStack {
-                
-            }
+            MainTabView()
         }
     }
 }
